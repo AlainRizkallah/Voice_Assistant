@@ -1,11 +1,16 @@
 import random
 import time
 import numpy
+import importlib
+
+import weatherAPI
 import speech_recognition as sr
 
 Users=[]
 UsersAudios=[]
 Prenoms=[]
+weatherLexicon=["météo","temps","température"]
+
 with open('Prenoms.csv' , 'r') as csvfile:
     csvfile.readline()  # skip the first line(column title)
     for line in csvfile:
@@ -78,5 +83,9 @@ def comprehend(transcription,audio):
                 for list in UsersAudios:
                     if list[0]==word :
                         list.append(audio)
+        if word in weatherLexicon:
+            print("il faut donner la température")
+            importlib.reload(weatherAPI)
+            weatherAPI.printTemp()
 
 

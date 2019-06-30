@@ -9,4 +9,4 @@ todos = json.loads(response.text)
 def printTemp():
     print(todos['list'][0]['main']['temp'])
 def returnTemp():
-    return todos['list'][0]['main']['temp']
+    return "Il fait actuellement "+str(todos['list'][0]['main']['temp'])+"°C"

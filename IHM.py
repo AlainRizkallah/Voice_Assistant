@@ -15,22 +15,25 @@ print(sr.__version__)
 r = sr.Recognizer()
 m = sr.Microphone()
 answer= ['empty']
+
 # On crée une fenêtre, racine de notre interface
 fenetre = Tk()
 
-def load():
-    answer[0]=recognize_speech_from_mic(r,m)
-def quitfenetre():
-    fenetre.quit
-
 # On crée un label (ligne de texte) souhaitant la bienvenue
 # Note : le premier paramètre passé au constructeur de Label est notre
+
 # interface racine
+var=StringVar();
 champ_label = Label(fenetre, text="SmartBot")
+champ_ans = Label(fenetre, textvariable=var)
 
 # On affiche le label dans la fenêtre
 champ_label.pack()
+champ_ans.pack()
 #boutons
+def load():
+    var.set(recognize_speech_from_mic(r,m))
+
 bouton_ExecuteP = Button(fenetre, text="Record", fg='Blue', command=load)
 bouton_ExecuteP.pack(side=LEFT, padx=5, pady=5)
 bouton_ExecuteP.pack()

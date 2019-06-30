@@ -64,18 +64,19 @@ def recognize_speech_from_mic(recognizer, microphone):
         # speech was unintelligible
         response["error"] = "Unable to recognize speech"
     if response["success"]:
-        comprehend(response["transcription"],audio)
-    else:
-        return response
+      return  comprehend(response["transcription"],audio)
+    #else:
+    #   return response
 
     return response
 
 def comprehend(transcription,audio):
     for word in transcription.split():
-        word = word.lower()
-        print(word)
-        if word in Prenoms :
+        wordlower = word.lower()
+        print(wordlower)
+        if wordlower in Prenoms :
             print("^This is a name!")
+            return("Bonjour "+word+ " !")
             if word not in Users:
                 Users.append(word)
                 UsersAudios.append([word,audio])
@@ -87,5 +88,6 @@ def comprehend(transcription,audio):
             print("il faut donner la température")
             importlib.reload(weatherAPI)
             weatherAPI.printTemp()
+            return weatherAPI.returnTemp()
 
 
